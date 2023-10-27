@@ -9,10 +9,11 @@ resource "aws_s3_bucket_website_configuration" "website_configuration" {
   }
 }
 
+
 resource "aws_s3_object" "react_build" {
   bucket = aws_s3_bucket.website_bucket.bucket
   key    = "react-app/"
-  source = "${var.build_path}"
+  source = "..${var.build_path}"
 }
 
 resource "aws_s3_bucket_policy" "bucket_policy" {

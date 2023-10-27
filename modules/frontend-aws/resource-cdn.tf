@@ -63,6 +63,9 @@ resource "terraform_data" "invalidate_cache" {
 
   provisioner "local-exec" {
      # https://developer.hashicorp.com/terraform/language/expressions/strings#heredoc-strings
+    environment = {
+        AWS_DEFAULT_REGION    = "eu-west-2"
+    }
     command = <<COMMAND
 aws cloudfront create-invalidation \
 --distribution-id ${aws_cloudfront_distribution.s3_distribution.id} \
