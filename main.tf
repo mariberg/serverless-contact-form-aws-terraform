@@ -16,3 +16,7 @@ module "frontend-aws" {
   build_path = var.contact-form.build_path
   content_version = var.contact-form.content_version
 }
+
+module "serverless-backend-aws" {
+  source = "./modules/serverless-backend-aws"
+}
