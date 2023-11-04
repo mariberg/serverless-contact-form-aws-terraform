@@ -118,7 +118,7 @@ interface FormData {
     e.preventDefault();
     try {
       // Your API endpoint URL
-      const apiUrl = 'https://b15946bp5g.execute-api.eu-west-2.amazonaws.com/test'; // Replace with your actual API endpoint URL
+      const apiUrl = 'https://vtr3npv336.execute-api.eu-west-2.amazonaws.com/test'; // Replace with your actual API endpoint URL
 
       // Send the data as JSON
       const response = await fetch(apiUrl, {

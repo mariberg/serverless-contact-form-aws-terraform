@@ -1,4 +1,4 @@
-output "api_gateway" {
+output "api_gateway_contact_form" {
   value = aws_api_gateway_rest_api.contact-form-api
 }
 
