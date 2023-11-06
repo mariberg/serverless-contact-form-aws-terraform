@@ -8,12 +8,11 @@ import {
   Textarea,
   Button,
   Group,
+  ActionIcon,
   rem,
   Popover
 } from '@mantine/core';
 import { ContactInfo } from './ContactInfo';
-
-
 const useStyles = createStyles((theme) => ({
   wrapper: {
     minHeight: 400,
@@ -23,22 +22,18 @@ const useStyles = createStyles((theme) => ({
     } 100%)`,
     borderRadius: theme.radius.md,
     padding: `calc(${theme.spacing.xl} * 2.5)`,
-
     [theme.fn.smallerThan('sm')]: {
       padding: `calc(${theme.spacing.xl} * 1.5)`,
     },
   },
-
   title: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     color: theme.white,
     lineHeight: 1,
   },
-
   description: {
     color: theme.colors[theme.primaryColor][0],
     maxWidth: '300px',
-
     [theme.fn.smallerThan('sm')]: {
       maxWidth: '100%',
     },
@@ -53,32 +48,26 @@ const useStyles = createStyles((theme) => ({
     color: theme.white,
     lineHeight: 1,
   },
-
   form: {
     backgroundColor: theme.white,
     padding: theme.spacing.xl,
     borderRadius: theme.radius.md,
     boxShadow: theme.shadows.lg,
   },
-
   social: {
     color: theme.white,
-
     '&:hover': {
       color: theme.colors[theme.primaryColor][1],
     },
   },
-
   input: {
     backgroundColor: theme.white,
     borderColor: theme.colors.gray[4],
     color: theme.black,
-
     '&::placeholder': {
       color: theme.colors.gray[5],
     },
   },
-
   inputInvalid: {
     backgroundColor: theme.white,
     borderColor: theme.colors.red[6], 
@@ -88,11 +77,9 @@ const useStyles = createStyles((theme) => ({
       color: theme.colors.gray[5],
     },
   },
-
   inputLabel: {
     color: theme.black,
   },
-
   control: {
     backgroundColor: theme.colors['ocean-blue'][9],
     '&:hover': {
@@ -100,22 +87,22 @@ const useStyles = createStyles((theme) => ({
     },
   },
 }));
-
 interface FormData {
   email: string;
   name: string;
   message: string;
 }
-
-export function ContactUs() {
-  const { classes } = useStyles();
-  const [formData, setFormData] = useState<FormData>({
-    email: '',
-    name: '',
-    message: '',
-  });
-  const [isEmailValid, setIsEmailValid] = useState(true);
-
+  export function ContactUs() {
+    const { classes } = useStyles();  
+    const [formData, setFormData] = useState<FormData>({
+      email: '',
+      name: '',
+      message: '',
+    });
+    const [isEmailValid, setIsEmailValid] = useState(true)
+    const [opened, setOpened] = useState(false)
+  
+  
 
   const handleChange = (field: keyof FormData, value: string) => {
     setFormData((prevData) => ({
@@ -128,40 +115,39 @@ export function ContactUs() {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return emailRegex.test(email);
   };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isEmailValid) {
-      console.error('Invalid email address');
-      return;
-    }
-
-    try {
-      // Your API endpoint URL
-      const apiUrl = 'https://vtr3npv336.execute-api.eu-west-2.amazonaws.com/test'; // Replace with your actual API endpoint URL
-      console.log("this is the api call  now")
-
-      // Send the data as JSON
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        // Request successful, do something here
-        console.log('Email sent successfully!');
-      } else {
-        // Request failed, handle errors here
-        console.error('Error sending email.');
+  
+    const handleSubmit = async (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!isEmailValid) {
+        console.error('Invalid email address');
+        return;
       }
-    } catch (error) {
-      console.error('An error occurred:', error);
-    }
-  };
-
+  
+      try {
+        // Your API endpoint URL
+        const apiUrl = 'https://vtr3.execute-api.eu-west-2.amazonaws.com/test'; // Replace with your actual API endpoint URL
+  
+        // Send the data as JSON
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+        console.log(response);
+        if (response.ok) {
+          // Request successful, do something here
+          console.log('Email sent successfully!');
+        } else {
+          // Request failed, handle errors here
+          console.error('Error sending email.');
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    };
+  
 
   return (
     <div className={classes.wrapper}>
@@ -171,10 +157,8 @@ export function ContactUs() {
           <Text className={classes.description} mt="sm" mb={30}>
             Leave your email and we will get back to you
           </Text>
-
           <Text className={classes.contactDescription}>Email: hello@example.com</Text>
             <Text className={classes.contact}>123 Main Street, City</Text>
-
         </div>
         <div className={classes.form}>
           <TextInput
@@ -211,21 +195,24 @@ export function ContactUs() {
             value={formData.message}
             onChange={(e) => handleChange('message', e.target.value)}
           />
-
           <Group position="right" mt="md">
-            <Popover width={200} position="top" withArrow shadow="md">
-              <Popover.Target>
-                <Button className={classes.control} onClick={handleSubmit}>
-                  Send message
-                </Button>
-              </Popover.Target>
-              <Popover.Dropdown>
-                <Text size="m">Your message has been sent!</Text>
-              </Popover.Dropdown>
-            </Popover>
+          {/* <Popover width={200} position="top" withArrow shadow="md"> */}
+          <Popover opened={opened} onChange={setOpened}>
+            <Popover.Target>
+              <Button onClick={(e) => {
+                handleSubmit(e);
+                setOpened((o) => !o);
+              }}>Send message</Button>
+            </Popover.Target>
+
+            <Popover.Dropdown>
+              <Text size="xs">Your message has been sent</Text>
+            </Popover.Dropdown>
+          </Popover>
+
           </Group>
         </div>
-        </SimpleGrid>
+      </SimpleGrid>
     </div>
   );
 }
