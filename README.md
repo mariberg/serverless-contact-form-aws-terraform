@@ -1,12 +1,8 @@
 # Serverless contact form utilizing AWS and Terraform
 
-This project features a simple static web app created with React and Mantine UI. The application includes only a contact form, but any other sections could be easy added.
-
-The application has been deployed on AWS, and the architecture is illustrated in the diagram below. The frontend application is stored in an Amazon S3 bucket and is served to users through Amazon CloudFront.
+This repository hosts a simple frontend web application with a contact form, designed to run on AWS's serverless architecture. It leverages Amazon Simple Email Service, AWS Lambda, API Gateway, S3 and CloudFront. The infrastructure is provisioned and managed using Terraform, allowing you to easily deploy and maintain your serverless contact form app on AWS.
 
 The website includes a contact form that users can utilize. The data from the contact form is sent to an API Gateway, which then directs it to a Lambda function. The Lambda function leverages Amazon Simple Email Service to forward the contents of the contact form to the charity's administrators.
-
-The AWS infrastructure was provisioned using Terraform as an 'infrastructure as code' tool.
 
 ![diagram](assets/diagram.png)
 
@@ -23,8 +19,11 @@ The Lambda code can be fine in aws-lambda -directory. For this code to work, you
 - add your custom domain to 'Access-Control-Allow-Origin' (unless running React app on localhost)
 - change to - and source -addresses accordingly
 
-Please note the email addresses have to be added and approved via the AWS SES console in order for the SES to use them.
-  
+Please note the email addresses have to be added and approved via the AWS SES console for the SES to use them.
+
+## ACM Certificate
+
+TODO  
 
 ## Set up
 
