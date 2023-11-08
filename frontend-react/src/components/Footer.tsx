@@ -1,5 +1,6 @@
 import { createStyles, Container, Group, Anchor, rem } from '@mantine/core';
 
+
 const useStyles = createStyles((theme) => ({
   footer: {
     marginTop: rem(15),

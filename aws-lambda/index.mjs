@@ -1,11 +1,10 @@
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
-var ses = new SESClient({ region: "eu-west-2" });
+var ses = new SESClient({ region: "eu-west-2" }); // Change here your region
 
 export const handler = async (event) => {
   console.log("Event:", event);
   const eventData = JSON.parse(event.body);
 
-  // Extract the values you need
   const email = eventData.email;
   const name = eventData.name;
   const message = eventData.message;
@@ -16,7 +15,7 @@ export const handler = async (event) => {
 
   const command = new SendEmailCommand({
     Destination: {
-      ToAddresses: ['marika.bergman@gmail.com'],
+      ToAddresses: ['email@example.com'], //Change here your destination email address
     },
     Message: {
       Body: {
@@ -25,7 +24,7 @@ export const handler = async (event) => {
 
       Subject: { Data: "New Message from Contact Form" },
     },
-    Source: 'marika.bergman@gmail.com',
+    Source: 'email@example.com', //Add here your source email address
   });
 
 
@@ -35,7 +34,7 @@ export const handler = async (event) => {
     response = {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "http://localhost:3000",
+        "Access-Control-Allow-Origin": "http://localhost:3000", //Change here your custom domain if applicable
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Methods": "POST, OPTIONS"
       },

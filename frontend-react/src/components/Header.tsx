@@ -1,5 +1,3 @@
-// https://ui.mantine.dev/component/header-responsive 
-
 import { useState } from 'react';
 import {
   createStyles,
@@ -15,9 +13,6 @@ import { useDisclosure } from '@mantine/hooks';
 import { Link, useLocation } from 'react-router-dom'; 
 
 const HEADER_HEIGHT = rem(60);
-
-const activeColor = '#D8F2F2';
-const activeTextColor = '#FFFFF';
 
 const useStyles = createStyles((theme) => ({
   root: {

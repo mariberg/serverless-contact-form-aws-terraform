@@ -1,14 +1,14 @@
 terraform {
   cloud {
-    organization = "Marika"
+    organization = "Marika" #Add here your organization
     workspaces {
-      name = "contact-form"
+      name = "contact-form" #Add here your workspace name
     }
   }
 }
 
 provider "aws" {
-  region = "eu-west-2"
+  region = "eu-west-2" #Add here your region
 }
 
 module "frontend-aws" {
@@ -29,5 +29,5 @@ module "cors" {
   api_resource_id = module.serverless-backend-aws.api_gateway_contact_form.root_resource_id
   allow_headers = ["Content-Type"]
   allow_methods = ["OPTIONS", "POST"]
-  allow_origin = "http://localhost:3000"
+  allow_origin = "http://localhost:3000" #Change to your custom domain if applicable
 }

@@ -10,7 +10,6 @@ locals {
   s3_origin_id = "MyS3Origin"
 }
 
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name              = aws_s3_bucket.website_bucket.bucket_regional_domain_name
@@ -62,7 +61,6 @@ resource "terraform_data" "invalidate_cache" {
   triggers_replace = terraform_data.content_version.output
 
   provisioner "local-exec" {
-     # https://developer.hashicorp.com/terraform/language/expressions/strings#heredoc-strings
     environment = {
         AWS_DEFAULT_REGION    = "eu-west-2"
     }

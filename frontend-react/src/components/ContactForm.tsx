@@ -8,11 +8,8 @@ import {
   Textarea,
   Button,
   Group,
-  ActionIcon,
-  rem,
   Popover
 } from '@mantine/core';
-import { ContactInfo } from './ContactInfo';
 const useStyles = createStyles((theme) => ({
   wrapper: {
     minHeight: 400,
@@ -196,7 +193,6 @@ interface FormData {
             onChange={(e) => handleChange('message', e.target.value)}
           />
           <Group position="right" mt="md">
-          {/* <Popover width={200} position="top" withArrow shadow="md"> */}
           <Popover opened={opened} onChange={setOpened}>
             <Popover.Target>
               <Button onClick={(e) => {

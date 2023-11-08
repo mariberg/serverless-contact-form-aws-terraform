@@ -5,7 +5,6 @@ resource "aws_api_gateway_rest_api" "contact-form-api" {
 }
 
 
-# The AWS_PROXY integration type causes API gateway to call into the API of another AWS service. In this case, it will call the AWS Lambda API to create an "invocation" of the Lambda function.
 resource "aws_api_gateway_integration" "lambda" {
   rest_api_id = "${aws_api_gateway_rest_api.contact-form-api.id}"
   resource_id = "${aws_api_gateway_method.proxy_root.resource_id}" 
@@ -19,7 +18,7 @@ resource "aws_api_gateway_integration" "lambda" {
 resource "aws_api_gateway_method" "proxy_root" {
   rest_api_id   = "${aws_api_gateway_rest_api.contact-form-api.id}"
   resource_id   = "${aws_api_gateway_rest_api.contact-form-api.root_resource_id}"
-  http_method   = "POST" #POST OR ANY?
+  http_method   = "POST"
   authorization = "NONE"
 }
 
