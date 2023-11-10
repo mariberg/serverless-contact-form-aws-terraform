@@ -22,7 +22,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   comment             = "Static website hosting for: ${aws_s3_bucket.website_bucket.bucket}"
   default_root_object = "index.html"
 
-  #aliases = ["mysite.example.com", "yoursite.example.com"]
+  #aliases = ["mysite.example.com", "yoursite.example.com"] #Add custom domains here
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
@@ -51,8 +51,12 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     }
   }
 
+ # acm_certificate_arn { #Add here your certificate if using custom domain
+ #   iam_certificate_id = "12345"
+ # }
 
-  viewer_certificate {
+
+  viewer_certificate { #Remove this if using custom domain
     cloudfront_default_certificate = true
   }
 }
