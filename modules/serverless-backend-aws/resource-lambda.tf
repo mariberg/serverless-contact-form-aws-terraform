@@ -1,7 +1,8 @@
-resource "aws_lambda_function" "contact-form" {
-  function_name = "ContactFormEmail"
+resource "aws_lambda_function" "serverless-contact-form-lambda" {
+  function_name = "ServerlessContactForm"
 
-  s3_bucket = "contact-form-lambda-code"
+  # change the name of the S3 bucket to the one you have created through the console
+  s3_bucket = "serverless-contact-form-lambda"
   s3_key    = "lambda.zip"
 
   handler = "index.handler"
@@ -11,7 +12,7 @@ resource "aws_lambda_function" "contact-form" {
 }
 
 resource "aws_iam_role" "lambda_exec" {
-  name = "serverless_contact_form_lambda"
+  name = "serverless_contact_form"
 
   assume_role_policy = <<EOF
 {
@@ -54,9 +55,9 @@ EOF
 resource "aws_lambda_permission" "apigw" {
   statement_id  = "AllowAPIGatewayInvoke"
   action        = "lambda:InvokeFunction"
-  function_name = "${aws_lambda_function.contact-form.function_name}"
+  function_name = "${aws_lambda_function.serverless-contact-form-lambda.function_name}"
   principal     = "apigateway.amazonaws.com"
 
-  source_arn = "${aws_api_gateway_rest_api.contact-form-api.execution_arn}/*/*" 
+  source_arn = "${aws_api_gateway_rest_api.serverless-contact-form-api.execution_arn}/*/*" 
 }
 

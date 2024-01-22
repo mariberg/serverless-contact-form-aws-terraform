@@ -11,11 +11,11 @@ provider "aws" {
   region = "eu-west-2" #Add here your region
 }
 
-module "frontend-aws" {
-  source = "./modules/frontend-aws"
-  build_path = var.contact-form.build_path
-  content_version = var.contact-form.content_version
-}
+#module "frontend-aws" {
+#  source = "./modules/frontend-aws"
+#  build_path = var.contact-form.build_path
+#  content_version = var.contact-form.content_version
+#}
 
 module "serverless-backend-aws" {
   source = "./modules/serverless-backend-aws"
@@ -29,5 +29,5 @@ module "cors" {
   api_resource_id = module.serverless-backend-aws.api_gateway_contact_form.root_resource_id
   allow_headers = ["Content-Type"]
   allow_methods = ["OPTIONS", "POST"]
-  allow_origin = "http://localhost:3000" #Change to your custom domain if applicable
+  allow_origin = "http://localhost:5173" #Change to your custom domain if applicable
 }
