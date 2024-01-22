@@ -1,7 +1,8 @@
 resource "aws_lambda_function" "serverless-contact-form-lambda" {
   function_name = "ServerlessContactForm"
 
-  # change the name of the S3 bucket to the one you have created through the console
+  # change the name of the S3 bucket to the one you have 
+  # created through the console
   s3_bucket = "serverless-contact-form-lambda"
   s3_key    = "lambda.zip"
 
@@ -29,10 +30,9 @@ resource "aws_iam_role" "lambda_exec" {
   ]
 }
 EOF
-# inline policy in order to access ses
+# inline policy in order to access SES
  inline_policy {
     name = "SESPermissionsPolicy"
-    #description = "Allows sending email via SES"
     policy = <<EOF
 {
   "Version": "2012-10-17",

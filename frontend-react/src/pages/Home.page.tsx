@@ -5,7 +5,7 @@ import {
   SimpleGrid,
   Group,
   Title,
-  Button,
+  Button
 } from '@mantine/core';
 
 export function HomePage() {
@@ -26,16 +26,15 @@ export function HomePage() {
   interface FormValues {
     name: string;
     email: string;
-    subject: string;
+    //subject: string;
     message: string;
   }
 
   const handleSubmit = async (values: FormValues) => {
     try {
-      // Your API endpoint URL
-      const apiUrl = 'https://vtr3.execute-api.eu-west-2.amazonaws.com/test'; // Replace with your actual API endpoint URL
+      // Replace with your actual API endpoint URL
+      const apiUrl = 'https://12345.execute-api.eu-west-2.amazonaws.com/test';
 
-      // Send the data as JSON
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -43,6 +42,7 @@ export function HomePage() {
         },
         body: JSON.stringify(values),
       });
+      console.log(values);
       console.log(response);
       if (response.ok) {
         // Request successful, do something here
