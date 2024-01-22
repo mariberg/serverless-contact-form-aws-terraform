@@ -34,7 +34,7 @@ export const handler = async (event) => {
     response = {
       statusCode: 200,
       headers: {
-        "Access-Control-Allow-Origin": "http://localhost:3000", //Change here your custom domain if applicable
+        "Access-Control-Allow-Origin": "http://localhost:5173", //Change here your custom domain if applicable
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Methods": "POST, OPTIONS"
       },
