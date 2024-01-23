@@ -1,6 +1,6 @@
 terraform {
   cloud {
-    organization = "Marika" #Add here your organization
+    organization = "MyOrganization" #Add here your organization
     workspaces {
       name = "contact-form" #Add here your workspace name
     }
@@ -11,6 +11,7 @@ provider "aws" {
   region = "eu-west-2" #Add here your region
 }
 
+# This module can be added to deploy the frontend with AWS S3 and CloudFront
 #module "frontend-aws" {
 #  source = "./modules/frontend-aws"
 #  build_path = var.contact-form.build_path

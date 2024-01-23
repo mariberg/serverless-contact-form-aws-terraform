@@ -66,7 +66,7 @@ resource "terraform_data" "invalidate_cache" {
 
   provisioner "local-exec" {
     environment = {
-        AWS_DEFAULT_REGION    = "eu-west-2"
+        AWS_DEFAULT_REGION    = "eu-west-2" # change your region here
     }
     command = <<COMMAND
 aws cloudfront create-invalidation \
